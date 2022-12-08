@@ -3,12 +3,16 @@
   "displayName": "PHP Getters and Setters",
   "publisher": "IvanGrigorov",
   "description": "This plugin allow you to create multiple getters and setters on vs code",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "engines": {
     "vscode": "^1.74.0"
   },
   "icon": "assets/php-logo-bigger.png",
-  "keywords": ["PHP", "Getter", "Setter"],
+  "keywords": [
+    "PHP",
+    "Getter",
+    "Setter"
+  ],
   "categories": [
     "Programming Languages"
   ],
@@ -18,7 +22,6 @@
     "onCommand:php-getters-and-setters.createSetters",
     "onCommand:php-getters-and-setters.createConstructor",
     "onCommand:php-getters-and-setters.createAll"
-
   ],
   "main": "./out/extension.js",
   "contributes": {
