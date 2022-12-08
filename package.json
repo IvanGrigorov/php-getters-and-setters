@@ -6,7 +6,7 @@
   "engines": {
     "vscode": "^1.74.0"
   },
-  "icon": "https://raw.githubusercontent.com/IvanGrigorov/php-getters-and-setters/master/assets/php-logo-bigger.png",
+  "icon": "assets/php-logo-bigger.png",
   "keywords": ["PHP", "Getter", "Setter"],
   "categories": [
     "Programming Languages"
