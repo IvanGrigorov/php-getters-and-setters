@@ -15,7 +15,10 @@
   "activationEvents": [
     "onCommand:php-getters-and-setters.create",
     "onCommand:php-getters-and-setters.createGetters",
-    "onCommand:php-getters-and-setters.createSetters"
+    "onCommand:php-getters-and-setters.createSetters",
+    "onCommand:php-getters-and-setters.createConstructor",
+    "onCommand:php-getters-and-setters.createAll"
+
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -30,7 +33,15 @@
       },
       {
         "command": "php-getters-and-setters.createSetters",
-        "title": "Generate Settes"
+        "title": "Generate Setters"
+      },
+      {
+        "command": "php-getters-and-setters.createConstructor",
+        "title": "Generate Constructor"
+      },
+      {
+        "command": "php-getters-and-setters.createAll",
+        "title": "Generate All"
       }
     ],
     "menus": {
@@ -46,6 +57,14 @@
         {
           "when": "editorHasSelection",
           "command": "php-getters-and-setters.createSetters"
+        },
+        {
+          "when": "editorHasSelection",
+          "command": "php-getters-and-setters.createConstructor"
+        },
+        {
+          "when": "editorHasSelection",
+          "command": "php-getters-and-setters.createAll"
         }
       ]
     }
