@@ -4,7 +4,7 @@
 
 This plugin allow you to create multiple getters and setters on vs code
 
-![Alt Text](https://raw.githubusercontent.com/IvanGrigorov/Open-AI-Code-Helper/master/images/open-ai-code-helper.gif)
+![Alt Text](https://raw.githubusercontent.com/IvanGrigorov/php-getters-and-setters/master/assets/php-getters-and%20setters.gif)
 
 ## Support
 
