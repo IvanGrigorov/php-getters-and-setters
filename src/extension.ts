@@ -49,12 +49,16 @@ export function activate(context: vscode.ExtensionContext) {
 
 }
 
+function splitLines(selection: string) {
+	return selection.split(/\r\n|\r|\n/);
+}
+
 function generateGettersAndSetters(selection: string) {
 	if (!selection) return;
 	getters = true;
 	setters = true;
 	constructor = false;
-	let properties = selection.split('\r\n');
+	let properties = splitLines(selection);
 	properties = properties.map((property) => property.trim());
 	generate(properties);
 }
@@ -64,7 +68,7 @@ function generateGetters(selection: string) {
 	getters = true;
 	setters = false;
 	constructor = false;
-	let properties = selection.split('\r\n');
+	let properties = splitLines(selection);
 	properties = properties.map((property) => property.trim());
 	generate(properties);
 }
@@ -74,7 +78,7 @@ function generateSetters(selection: string) {
 	getters = false;
 	setters = true;
 	constructor = false;
-	let properties = selection.split('\r\n');
+	let properties = splitLines(selection);
 	properties = properties.map((property) => property.trim());
 	generate(properties);
 }
@@ -84,7 +88,7 @@ function createConstructorFromSelection(selection: string) {
 	getters = false;
 	setters = false;
 	constructor = true;
-	let properties = selection.split('\r\n');
+	let properties = splitLines(selection);
 	properties = properties.map((property) => property.trim());
 	generate(properties);
 }
@@ -95,7 +99,7 @@ function createAllFromSelection(selection: string) {
 	getters = true;
 	setters = true;
 	constructor = true;
-	let properties = selection.split('\r\n');
+	let properties = splitLines(selection);
 	properties = properties.map((property) => property.trim());
 	generate(properties);
 }

@@ -46,13 +46,16 @@ function activate(context) {
     context.subscriptions.push(createSetters);
 }
 exports.activate = activate;
+function splitLines(selection) {
+    return selection.split(/\r\n|\r|\n/);
+}
 function generateGettersAndSetters(selection) {
     if (!selection)
         return;
     getters = true;
     setters = true;
     constructor = false;
-    let properties = selection.split('\r\n');
+    let properties = splitLines(selection);
     properties = properties.map((property) => property.trim());
     generate(properties);
 }
@@ -62,7 +65,7 @@ function generateGetters(selection) {
     getters = true;
     setters = false;
     constructor = false;
-    let properties = selection.split('\r\n');
+    let properties = splitLines(selection);
     properties = properties.map((property) => property.trim());
     generate(properties);
 }
@@ -72,7 +75,7 @@ function generateSetters(selection) {
     getters = false;
     setters = true;
     constructor = false;
-    let properties = selection.split('\r\n');
+    let properties = splitLines(selection);
     properties = properties.map((property) => property.trim());
     generate(properties);
 }
@@ -82,7 +85,7 @@ function createConstructorFromSelection(selection) {
     getters = false;
     setters = false;
     constructor = true;
-    let properties = selection.split('\r\n');
+    let properties = splitLines(selection);
     properties = properties.map((property) => property.trim());
     generate(properties);
 }
@@ -92,7 +95,7 @@ function createAllFromSelection(selection) {
     getters = true;
     setters = true;
     constructor = true;
-    let properties = selection.split('\r\n');
+    let properties = splitLines(selection);
     properties = properties.map((property) => property.trim());
     generate(properties);
 }
