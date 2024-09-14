@@ -19,6 +19,11 @@ Generate Setters
 
 Generate Getters
 
+
+### v0.1.4 Option to generate constructors and small setter fix:
+
+Fix for generating constructors: `__constructor` has been fixed to `__construct`
+
 ## Support
 
 ivangrigorov9 at gmail dot com

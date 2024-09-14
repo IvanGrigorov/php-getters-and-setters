@@ -141,7 +141,7 @@ function generateConstructor(properties, editBuilder) {
     });
     paramTemplate = propertyArray.join(', ');
     let template = `
-	public function __constructor(${paramTemplate}) {
+	public function __construct(${paramTemplate}) {
 `;
     properties.forEach(property => {
         const name = parsePropertyName(property);
