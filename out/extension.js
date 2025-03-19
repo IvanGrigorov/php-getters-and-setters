@@ -8,6 +8,7 @@ const phpTypes = ['string', 'int', 'dloat', 'null', 'bool', 'array', 'object', '
 let getters = false;
 let setters = false;
 let constructor = false;
+let lineCode = 0;
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
 function activate(context) {
@@ -126,6 +127,9 @@ function returnPropertyType(property) {
     }
     return typeOfProperty;
 }
+function updateLineNumbers(text) {
+    lineCode += (text.match(/\r\n/g) || []).length + 1;
+}
 function generateConstructor(properties, editBuilder) {
     let paramTemplate = '';
     let propertyArray = [];
@@ -155,7 +159,8 @@ function generateConstructor(properties, editBuilder) {
 	}
 `;
     const doc = vscode.window.activeTextEditor.document;
-    editBuilder.insert(new vscode.Position(doc.lineCount - 1, 1), template);
+    editBuilder.insert(new vscode.Position(lineCode, 1), template);
+    updateLineNumbers(template);
 }
 async function generateGetter(name, upperCaseName, type, editBuilder) {
     const doc = vscode.window.activeTextEditor.document;
@@ -170,10 +175,12 @@ async function generateGetter(name, upperCaseName, type, editBuilder) {
 	}
 `;
     if (type) {
-        editBuilder.insert(new vscode.Position(doc.lineCount - 1, 1), templateWithType);
+        editBuilder.insert(new vscode.Position(lineCode, 1), templateWithType);
+        updateLineNumbers(templateWithType);
     }
     else {
-        editBuilder.insert(new vscode.Position(doc.lineCount - 1, 1), templateWithoutType);
+        editBuilder.insert(new vscode.Position(lineCode, 1), templateWithoutType);
+        updateLineNumbers(templateWithoutType);
     }
 }
 async function generateSetter(name, upperCaseName, type, editBuilder) {
@@ -189,19 +196,23 @@ async function generateSetter(name, upperCaseName, type, editBuilder) {
 `;
     const doc = vscode.window.activeTextEditor.document;
     if (type) {
-        editBuilder.insert(new vscode.Position(doc.lineCount - 1, 1), templateWithType);
+        editBuilder.insert(new vscode.Position(lineCode, 1), templateWithType);
+        updateLineNumbers(templateWithType);
     }
     else {
-        editBuilder.insert(new vscode.Position(doc.lineCount - 1, 1), templateWithoutType);
+        editBuilder.insert(new vscode.Position(lineCode, 1), templateWithoutType);
+        updateLineNumbers(templateWithoutType);
     }
 }
 async function generate(properties) {
-    let text = vscode.window.activeTextEditor.document.getText().replace(/}$/, '').trim();
+    let text = vscode.window.activeTextEditor.document.getText().replace(/}+[. \r\n]*(\?>)*$/, '');
+    lineCode = (text.match(/\r\n/g) || []).length + 2;
     vscode.window.activeTextEditor?.edit(editBuilder => {
         const doc = vscode.window.activeTextEditor.document;
         editBuilder.delete(new vscode.Range(doc.lineAt(0).range.start, doc.lineAt(doc.lineCount - 1).range.end));
         editBuilder.insert(doc.lineAt(0).range.start, text);
         editBuilder.insert(doc.lineAt(doc.lineCount - 1).range.end, '\r\n');
+        lineCode += 1;
         if (constructor) {
             generateConstructor(properties, editBuilder);
         }

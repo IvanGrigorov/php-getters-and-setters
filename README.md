@@ -24,6 +24,10 @@ Generate Getters
 
 Fix for generating constructors: `__constructor` has been fixed to `__construct`
 
+### v0.1.5 Option to generate constructors and small setter fix:
+
+Fix for calculating the exact number of lines and where to insert the generated code
+
 ## Support
 
 ivangrigorov9 at gmail dot com
